@@ -1036,7 +1036,7 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   maxSpeed: 20
   accelerationRate: 5
-  decelerationRate: 0
+  decelerationRate: 0.5
   turnSpeed: 100
   playerInput: {x: 0, y: 0}
 --- !u!114 &5457897371678040459
