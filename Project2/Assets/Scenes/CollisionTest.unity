@@ -402,7 +402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076293945, y: 0.14399719}
+  m_AnchoredPosition: {x: 0.000015258789, y: 0.14399719}
   m_SizeDelta: {x: 0.21000671, y: -0.2879982}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &650133392
@@ -659,7 +659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1864480374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1936981695
 Transform:
   m_ObjectHideFlags: 0
@@ -869,7 +869,7 @@ MonoBehaviour:
   asteroid1: {fileID: 1318801329}
   asteroid2: {fileID: 320077165}
   asteroid3: {fileID: 143302315}
-  currentCollision: {fileID: 0}
+  currentCollision: {fileID: 650133392}
 --- !u!1001 &3315212973191039966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1035,8 +1035,8 @@ MonoBehaviour:
   direction: {x: 1, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
-  maxSpeed: 20
-  accelerationRate: 5
+  maxSpeed: 15
+  accelerationRate: 6
   decelerationRate: 0.5
   turnSpeed: 150
   playerInput: {x: 0, y: 0}
@@ -1070,16 +1070,3 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5457897371678040460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5457897371678040457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77c91e6249d7e454a99a22a6ac26e335, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullets: {fileID: 0}

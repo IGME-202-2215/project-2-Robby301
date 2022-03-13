@@ -7,6 +7,7 @@ TagManager:
   - Ship
   - Rock
   - Collision
+  - Bullet
   layers:
   - Default
   - TransparentFX

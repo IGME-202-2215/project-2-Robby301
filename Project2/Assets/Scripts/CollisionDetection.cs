@@ -12,10 +12,10 @@ public class CollisionDetection : MonoBehaviour
     SpriteRenderer asteroidSprite;
 
     bool aABBCollision = true;
-    bool circleCollision = false;
+    //bool circleCollision = false;
 
-    float shipRadius = 0.7f;
-    float asteroidRadius = 1f;
+    //float shipRadius = 0.7f;
+    //float asteroidRadius = 1f;
     float distance;
 
     [SerializeField]
@@ -24,8 +24,8 @@ public class CollisionDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentCollision.text = "AABB Collision";
-        float distance = Mathf.Pow((shipRadius + asteroidRadius), 2);
+        //currentCollision.text = "AABB Collision";
+        //float distance = Mathf.Pow((shipRadius + asteroidRadius), 2);
     }
 
     // Update is called once per frame
@@ -70,7 +70,7 @@ public class CollisionDetection : MonoBehaviour
             }
         }
 
-        if (circleCollision)
+        /*if (circleCollision)
         {
             if (CircleCollision(spaceShip, asteroid1))
             {
@@ -107,7 +107,7 @@ public class CollisionDetection : MonoBehaviour
                 asteroidSprite = asteroid3.GetComponent<SpriteRenderer>();
                 asteroidSprite.color = Color.white;
             }
-        }
+        }*/
     }
 
     bool AABBCollision(GameObject theShip, GameObject theAsteroid)
@@ -130,7 +130,7 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-    bool CircleCollision(GameObject theShip, GameObject theAsteroid)
+    /*bool CircleCollision(GameObject theShip, GameObject theAsteroid)
     {
         shipSprite = theShip.GetComponent<SpriteRenderer>();
         asteroidSprite = theAsteroid.GetComponent<SpriteRenderer>();
@@ -163,5 +163,5 @@ public class CollisionDetection : MonoBehaviour
             aABBCollision = true;
             circleCollision = false;
         }
-    }
+    }*/
 }

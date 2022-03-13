@@ -67,7 +67,7 @@ public class Vehicle : MonoBehaviour
         }
         if(playerInput.y <= 0)
         {
-            velocity *= decelerationRate;
+            velocity *= decelerationRate * Time.deltaTime;
         }
 
         // Calc how fast to move
@@ -95,5 +95,6 @@ public class Vehicle : MonoBehaviour
     {
         GameObject bullet = Instantiate(bullets);
         bullet.transform.position = vehiclePosition;
+        bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
     }
 }
