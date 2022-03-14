@@ -27,6 +27,7 @@ The hit box seems pretty unfair when it comes to the large sized asteroids, but 
 -   There is only one image of the asteroid, no different variations. The only difference between the stages is that they are scaled to different sizes.
 -   Because I have three stages instead of two I have changed how the points work. The largest asteroid gives 10 points, the middle gives 20 then the smallest gives 30.
 -   In regards to my sources, I downloaded the ship and asteroid from a website that had both of them in it. Now I can't find that website, so I can't list them in my sources.
+-   No comments within code
 
 ### Sources
 
