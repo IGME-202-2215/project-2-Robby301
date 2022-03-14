@@ -1,167 +1,103 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CollisionDetection : MonoBehaviour
 {
+    public AsteroidSpawner spawnHitAsteroids;
+    public TrackScoreAndLives tracker;
+
     public GameObject spaceShip;
-    public GameObject asteroid1;
-    public GameObject asteroid2;
-    public GameObject asteroid3;
+    public GameObject gameOverText;
+
+    public GameObject[] asteroids;
+    public GameObject[] bullets;
 
     SpriteRenderer shipSprite;
     SpriteRenderer asteroidSprite;
-
-    bool aABBCollision = true;
-    //bool circleCollision = false;
-
-    //float shipRadius = 0.7f;
-    //float asteroidRadius = 1f;
-    float distance;
-
-    [SerializeField]
-    Text currentCollision;
+    SpriteRenderer bulletSprite;
 
     // Start is called before the first frame update
     void Start()
     {
-        //currentCollision.text = "AABB Collision";
-        //float distance = Mathf.Pow((shipRadius + asteroidRadius), 2);
+        shipSprite = spaceShip.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (aABBCollision)
+        if (tracker.lives > 0)
         {
-            if(AABBCollision(spaceShip, asteroid1))
+            asteroids = GameObject.FindGameObjectsWithTag("Rock");
+            bullets = GameObject.FindGameObjectsWithTag("Bullet");
+
+            foreach (GameObject asteroid in asteroids)
             {
-                shipSprite = spaceShip.GetComponent<SpriteRenderer>();
-                asteroidSprite = asteroid1.GetComponent<SpriteRenderer>();
-                shipSprite.color = Color.red;
-                asteroidSprite.color = Color.red;
+                asteroidSprite = asteroid.GetComponent<SpriteRenderer>();
+                if (
+                (asteroidSprite.bounds.min.x < shipSprite.bounds.max.x) &&
+                (asteroidSprite.bounds.max.x > shipSprite.bounds.min.x) &&
+                (asteroidSprite.bounds.max.y > shipSprite.bounds.min.y) &&
+                (asteroidSprite.bounds.min.y < shipSprite.bounds.max.y)
+                )
+                {
+                    //Debug.Log("SHIP HIT");
+                    Destroy(asteroid);
+                    tracker.lives -= 1;
+                }
+                else
+                {
+                    shipSprite.color = Color.white;
+                    asteroidSprite.color = Color.white;
+                }
             }
-            else if(AABBCollision(spaceShip, asteroid2))
+
+            foreach (GameObject asteroid in asteroids)
             {
-                shipSprite = spaceShip.GetComponent<SpriteRenderer>();
-                asteroidSprite = asteroid2.GetComponent<SpriteRenderer>();
-                shipSprite.color = Color.red;
-                asteroidSprite.color = Color.red;
+                asteroidSprite = asteroid.GetComponent<SpriteRenderer>();
+
+                foreach (GameObject bullet in bullets)
+                {
+                    bulletSprite = bullet.GetComponent<SpriteRenderer>();
+
+                    if (
+                    (asteroidSprite.bounds.min.x < bulletSprite.bounds.max.x) &&
+                    (asteroidSprite.bounds.max.x > bulletSprite.bounds.min.x) &&
+                    (asteroidSprite.bounds.max.y > bulletSprite.bounds.min.y) &&
+                    (asteroidSprite.bounds.min.y < bulletSprite.bounds.max.y)
+                    )
+                    {
+                        /*Debug.Log("BULLET HIT");
+                        bulletSprite.color = Color.red;
+                        asteroidSprite.color = Color.red;*/
+                        Destroy(bullet);
+                        spawnHitAsteroids.AsteroidHit(asteroid);
+                    }
+                    else
+                    {
+                        bulletSprite.color = Color.white;
+                        asteroidSprite.color = Color.white;
+                    }
+                }
             }
-            else if(AABBCollision(spaceShip, asteroid3))
-            {
-                shipSprite = spaceShip.GetComponent<SpriteRenderer>();
-                asteroidSprite = asteroid3.GetComponent<SpriteRenderer>();
-                shipSprite.color = Color.red;
-                asteroidSprite.color = Color.red;
-            }
-            else
-            {
-                shipSprite = spaceShip.GetComponent<SpriteRenderer>();
-                shipSprite.color = Color.white;
-
-                asteroidSprite = asteroid1.GetComponent<SpriteRenderer>();
-                asteroidSprite.color = Color.white;
-
-                asteroidSprite = asteroid2.GetComponent<SpriteRenderer>();
-                asteroidSprite.color = Color.white;
-
-                asteroidSprite = asteroid3.GetComponent<SpriteRenderer>();
-                asteroidSprite.color = Color.white;
-            }
-        }
-
-        /*if (circleCollision)
-        {
-            if (CircleCollision(spaceShip, asteroid1))
-            {
-                shipSprite = spaceShip.GetComponent<SpriteRenderer>();
-                asteroidSprite = asteroid1.GetComponent<SpriteRenderer>();
-                shipSprite.color = Color.red;
-                asteroidSprite.color = Color.red;
-            }
-            else if (CircleCollision(spaceShip, asteroid2))
-            {
-                shipSprite = spaceShip.GetComponent<SpriteRenderer>();
-                asteroidSprite = asteroid2.GetComponent<SpriteRenderer>();
-                shipSprite.color = Color.red;
-                asteroidSprite.color = Color.red;
-            }
-            else if (CircleCollision(spaceShip, asteroid3))
-            {
-                shipSprite = spaceShip.GetComponent<SpriteRenderer>();
-                asteroidSprite = asteroid3.GetComponent<SpriteRenderer>();
-                shipSprite.color = Color.red;
-                asteroidSprite.color = Color.red;
-            }
-            else
-            {
-                shipSprite = spaceShip.GetComponent<SpriteRenderer>();
-                shipSprite.color = Color.white;
-
-                asteroidSprite = asteroid1.GetComponent<SpriteRenderer>();
-                asteroidSprite.color = Color.white;
-
-                asteroidSprite = asteroid2.GetComponent<SpriteRenderer>();
-                asteroidSprite.color = Color.white;
-
-                asteroidSprite = asteroid3.GetComponent<SpriteRenderer>();
-                asteroidSprite.color = Color.white;
-            }
-        }*/
-    }
-
-    bool AABBCollision(GameObject theShip, GameObject theAsteroid)
-    {
-        shipSprite = theShip.GetComponent<SpriteRenderer>();
-        asteroidSprite = theAsteroid.GetComponent<SpriteRenderer>();
-
-        if (
-            (asteroidSprite.bounds.min.x < shipSprite.bounds.max.x) &&
-            (asteroidSprite.bounds.max.x > shipSprite.bounds.min.x) &&
-            (asteroidSprite.bounds.max.y > shipSprite.bounds.min.y) &&
-            (asteroidSprite.bounds.min.y < shipSprite.bounds.max.y)
-           )
-        {
-            return true;
         }
         else
         {
-            return false;
+            GameObject[] allAsteroids = GameObject.FindGameObjectsWithTag("Rock");
+
+            foreach(GameObject asteroid in allAsteroids)
+            {
+                Destroy(asteroid);
+            }
+
+            GameObject[] allBullets = GameObject.FindGameObjectsWithTag("Bullet");
+
+            foreach (GameObject bullet in allBullets)
+            {
+                Destroy(bullet);
+            }
+
+            Destroy(spaceShip);
+
+            gameOverText.SetActive(true);
         }
     }
-
-    /*bool CircleCollision(GameObject theShip, GameObject theAsteroid)
-    {
-        shipSprite = theShip.GetComponent<SpriteRenderer>();
-        asteroidSprite = theAsteroid.GetComponent<SpriteRenderer>();
-
-        float currDistance =
-            Mathf.Pow((shipSprite.bounds.center.x - asteroidSprite.bounds.center.x), 2f) +
-            Mathf.Pow((shipSprite.bounds.center.y - asteroidSprite.bounds.center.y), 2f);
-
-        if (currDistance < distance)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public void OnClick()
-    {
-        if (aABBCollision)
-        {
-            currentCollision.text = "Circle Collision";
-            aABBCollision = false;
-            circleCollision = true;
-        }
-        else if (circleCollision)
-        {
-            currentCollision.text = "AABB Collision";
-            aABBCollision = true;
-            circleCollision = false;
-        }
-    }*/
 }

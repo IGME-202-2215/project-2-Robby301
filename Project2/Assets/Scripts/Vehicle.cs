@@ -93,8 +93,17 @@ public class Vehicle : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
-        GameObject bullet = Instantiate(bullets);
-        bullet.transform.position = vehiclePosition;
-        bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+        GameObject[] allBullets = GameObject.FindGameObjectsWithTag("Bullet");
+
+        if(allBullets.Length >= 2)
+        {
+            return;
+        }
+        else
+        {
+            GameObject bullet = Instantiate(bullets);
+            bullet.transform.position = vehiclePosition;
+            bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+        }
     }
 }
